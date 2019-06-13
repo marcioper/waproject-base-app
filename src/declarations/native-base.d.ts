@@ -1,7 +1,7 @@
-import * as React from 'react';
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 import * as ReactNative from 'react-native';
 
-declare module "native-base" {
+declare module 'native-base' {
   namespace NativeBase {
     interface Button extends ReactNative.TouchableOpacityProperties {
       accent?: boolean;

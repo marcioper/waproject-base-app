@@ -1,5 +1,5 @@
 import { Toast } from 'native-base';
-import { isAndroid } from '~/config';
+import { IS_ANDROID } from '~/config';
 import { errorMessageFormatter } from '~/formatters/errorMessage';
 
 import { InteractionManager } from './interactionManager';
@@ -10,7 +10,7 @@ export function toast(text: string, duration: number = 5000, type: typeToast = n
   InteractionManager.runAfterInteractions(() => {
     Toast.show({
       text,
-      position: isAndroid ? 'bottom' : 'top',
+      position: IS_ANDROID ? 'bottom' : 'top',
       buttonText: 'OK',
       duration,
       type

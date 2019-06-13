@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from 'react-navigation';
 import HomePage from '~/components/Screens/Home';
 import ProfilePage from '~/components/Screens/Profile/Details';
-import { isiOS } from '~/config';
+import { IS_IOS } from '~/config';
 import { theme } from '~/theme';
 
 export const HomeTabScreens: any = {
@@ -14,7 +14,7 @@ const HomeTabNavigator = createBottomTabNavigator(HomeTabScreens, {
   swipeEnabled: false,
   tabBarOptions: {
     showIcon: true,
-    showLabel: isiOS,
+    showLabel: IS_IOS,
     activeTintColor: theme.primary,
     pressColor: theme.primary,
     indicatorStyle: {

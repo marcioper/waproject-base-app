@@ -1,7 +1,7 @@
-import { isDevelopment } from '~/config';
+import { IS_DEV } from '~/config';
 
 export function errorMessageFormatter(err: any): string {
-  if (isDevelopment) {
+  if (IS_DEV) {
     console.error(err.response || err);
   }
 

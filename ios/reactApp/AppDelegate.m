@@ -16,7 +16,9 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <BugsnagReactNative/BugsnagReactNative.h>
-#import "RNFIRMessaging.h"
+#import <Firebase.h>
+#import "RNFirebaseNotifications.h"
+#import "RNFirebaseMessaging.h"
 
 @implementation AppDelegate
 
@@ -25,12 +27,20 @@
   NSURL *jsCodeLocation;
 
   #ifdef DEBUG
-    // jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-    jsCodeLocation = [NSURL URLWithString:@"http://192.168.15.149:8081/index.bundle?platform=ios&dev=true"];
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    // jsCodeLocation = [NSURL URLWithString:@"http://192.168.105.88:8081/index.bundle?platform=ios&dev=true"];
   #else
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   #endif
-  
+
+  [BugsnagReactNative start];
+
+  [FIRApp configure];
+  [RNFirebaseNotifications configure];
+
+  [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"reactApp"
                                                initialProperties:nil
@@ -42,43 +52,27 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [[UIDatePicker appearance] setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"pt-BR"]];
+
   #ifndef DEBUG
   [RNSplashScreen show];
   #endif
-  [BugsnagReactNative start];
 
-  [FIRApp configure];
-  [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
-  
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                           didFinishLaunchingWithOptions:launchOptions];
   return YES;
 }
 
- - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
- {
-   [RNFIRMessaging willPresentNotification:notification withCompletionHandler:completionHandler];
- }
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+  [[RNFirebaseNotifications instance] didReceiveLocalNotification:notification];
+}
 
- #if defined(__IPHONE_11_0)
- - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler
- {
-   [RNFIRMessaging didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
- }
- #else
- - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler
- {
-   [RNFIRMessaging didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
- }
- #endif
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
+                                                       fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
+  [[RNFirebaseNotifications instance] didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
 
- -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-   [RNFIRMessaging didReceiveLocalNotification:notification];
- }
-
- - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
-   [RNFIRMessaging didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
- }
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+  [[RNFirebaseMessaging instance] didRegisterUserNotificationSettings:notificationSettings];
+}
 
 - (BOOL)application:(UIApplication *)application
         openURL:(NSURL *)url

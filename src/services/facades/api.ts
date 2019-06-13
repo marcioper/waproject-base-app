@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, Method } from 'axios';
 import { NetInfo } from 'react-native';
 import * as rxjs from 'rxjs'; import { Observable, ReplaySubject } from 'rxjs';
 
 import { ApiError } from '~/errors/api';
 import { NoInternetError } from '~/errors/noInternet';
 import rxjsOperators from '~/rxjs-operators';
-import { apiEndpoint } from '~/config';
+import { API_ENDPOINT } from '~/config';
 import logService, { LogService } from '../log';
 import tokenService, { TokenService } from '../token';
 
@@ -39,7 +39,7 @@ export class ApiService {
     );
   }
 
-  private request<T>(method: string, url: string, data: any = null): Observable<T> {
+  private request<T>(method: Method, url: string, data: any = null): Observable<T> {
     return this.connection$.pipe(
       rxjsOperators.sampleTime(500),
       rxjsOperators.first(),
@@ -102,5 +102,5 @@ export class ApiService {
 
 }
 
-const apiService = new ApiService(apiEndpoint, logService, tokenService);
+const apiService = new ApiService(API_ENDPOINT, logService, tokenService);
 export default apiService;

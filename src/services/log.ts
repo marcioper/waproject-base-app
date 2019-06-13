@@ -1,5 +1,5 @@
 import { Client, Configuration } from 'bugsnag-react-native';
-import { isDevelopment } from '~/config';
+import { IS_DEV } from '~/config';
 import { IUserToken } from '~/interfaces/tokens/user';
 
 export class LogService {
@@ -58,5 +58,5 @@ export class LogService {
 
 }
 
-const logService = new LogService(isDevelopment);
+const logService = new LogService(IS_DEV);
 export default logService;

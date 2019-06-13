@@ -15,11 +15,6 @@ interface IProps {
 }
 
 export default class ErrorMessage extends React.PureComponent<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
-    this.state = { icon: '', message: '' };
-  }
-
   static getDerivedStateFromProps({ error }: IProps, currentState: IState): IState {
     let icon, message;
 
@@ -45,8 +40,14 @@ export default class ErrorMessage extends React.PureComponent<IProps, IState> {
     };
   }
 
+  constructor(props: IProps) {
+    super(props);
+    this.state = { icon: '', message: '' };
+  }
+
   render(): JSX.Element {
     const { icon, message } = this.state;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { error, ...props } = this.props;
 
     return <EmptyMessage icon={icon} message={message} {...props} />;

@@ -1,6 +1,6 @@
 import { setJSExceptionHandler } from 'react-native-exception-handler';
 import RNRestart from 'react-native-restart';
-import { isDevelopment } from '~/config';
+import { IS_DEV } from '~/config';
 import { alertError } from '~/providers/alert';
 import { toastError } from '~/providers/toast';
 import logService from '~/services/log';
@@ -17,4 +17,4 @@ setJSExceptionHandler((err: any, isFatal: boolean) => {
 
   alertError(err, 'Reabrir', 'É necessário reabrir o app')
     .subscribe(() => RNRestart.Restart());
-}, !isDevelopment);
+}, !IS_DEV);

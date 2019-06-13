@@ -2,4 +2,5 @@
 <resources>
   <color name="primary_dark">#000000</color>
   <color name="ic_background">#263238</color>
+  <color name="notification">#263238</color>
 </resources>

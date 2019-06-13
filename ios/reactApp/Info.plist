@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BugsnagAPIKey</key>
+	<string>be00ba79aeb4c0d0bc52e7be19a48462</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -55,8 +57,6 @@
 	<string>231990960983128</string>
 	<key>FacebookDisplayName</key>
 	<string>WaProject Base</string>
-	<key>BugsnagAPIKey</key>
-	<string>be00ba79aeb4c0d0bc52e7be19a48462</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

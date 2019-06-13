@@ -1,6 +1,6 @@
 import variablesTheme from 'native-base/src/theme/variables/platform';
 import { Dimensions, StyleSheet } from 'react-native';
-import { isAndroid, isiOS } from '~/config';
+import { IS_ANDROID, IS_IOS } from '~/config';
 
 const primary = '#263238';
 const accent = '#3d58f6';
@@ -62,7 +62,7 @@ export const theme: typeof variablesTheme & IThemeExtra = {
   topTabBarBorderColor: 'white',
   topTabBarActiveBorderColor: 'white',
   radioColor: primary,
-  radioBtnSize: isiOS ? 35 : variablesTheme.radioBtnSize,
+  radioBtnSize: IS_IOS ? 35 : variablesTheme.radioBtnSize,
   defaultSpinnerColor: primary
 };
 
@@ -135,7 +135,7 @@ export const classes = StyleSheet.create({
     color: theme.toolbarBtnTextColor,
     backgroundColor: 'transparent',
     borderWidth: 0,
-    marginTop: isAndroid ? 5 : 0,
+    marginTop: IS_ANDROID ? 5 : 0,
     elevation: 0,
   }
 });

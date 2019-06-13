@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
-import com.evollu.react.fcm.FIRMessagingPackage;
 import com.bugsnag.BugsnagReactNative;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -22,6 +21,11 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
+
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; 
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage; 
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,10 +45,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGestureHandlerPackage(),
+          new RNGestureHandlerPackage(),
           new ReactNativeRestartPackage(),
           new ReactNativeExceptionHandlerPackage(),
-          new FIRMessagingPackage(),
+          new RNFirebasePackage(),
+          new RNFirebaseNotificationsPackage(),
+          new RNFirebaseMessagingPackage(),
+          new RNFirebaseAnalyticsPackage(),
           BugsnagReactNative.getPackage(),
           new RNGoogleSigninPackage(),
           new RNDeviceInfo(),

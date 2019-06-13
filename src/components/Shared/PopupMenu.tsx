@@ -45,6 +45,7 @@ export class PopupMenu extends React.Component<IProps> {
   }
 
   render(): JSX.Element {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { onPress, actions, ...props } = this.props;
 
     return (

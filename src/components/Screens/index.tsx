@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StatusBar, View } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import BaseComponent from '~/components/Shared/Abstract/Base';
-import { isAndroid } from '~/config';
+import { IS_ANDROID } from '~/config';
 import rxjsOperators from '~/rxjs-operators';
 import { appDefaultNavigation, appOpened } from '~/services';
 import tokenService from '~/services/token';
@@ -14,7 +14,7 @@ export default class IndexPage extends BaseComponent {
     appOpened();
 
     StatusBar.setBarStyle('light-content');
-    isAndroid && StatusBar.setBackgroundColor(theme.statusBarColor);
+    IS_ANDROID && StatusBar.setBackgroundColor(theme.statusBarColor);
 
     appDefaultNavigation().pipe(
       rxjsOperators.first(),

@@ -1,6 +1,6 @@
 {
   "editor.formatOnType": true,
-  "eslint.enable": false,
+  "eslint.enable": true,
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -15,5 +15,11 @@
   "files.associations": {
     "*.js": "javascriptreact"
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+  ],
 }

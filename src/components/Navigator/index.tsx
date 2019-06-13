@@ -21,15 +21,15 @@ const Navigator = createStackNavigator({
   UserEdit: { screen: UserEditPage },
   Dev: { screen: DevPage }
 }, {
-    // headerMode: 'none',
-    headerBackTitleVisible: false,
-    initialRouteName: 'Index',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: theme.toolbarDefaultBg,
-      },
-      headerTintColor: theme.toolbarBtnTextColor,
-    }
-  });
+  // headerMode: 'none',
+  headerBackTitleVisible: false,
+  initialRouteName: 'Index',
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: theme.toolbarDefaultBg,
+    },
+    headerTintColor: theme.toolbarBtnTextColor,
+  }
+});
 
 export default createAppContainer(Navigator);
