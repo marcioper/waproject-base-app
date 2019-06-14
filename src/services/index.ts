@@ -1,6 +1,3 @@
-import './facades/linking/handlers/register';
-import './notification/handlers/register';
-
 import { NavigationScreenProp } from 'react-navigation';
 import { BehaviorSubject, Observable } from 'rxjs';
 import RxOp from '~/rxjs-operators';
