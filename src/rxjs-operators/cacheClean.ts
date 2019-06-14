@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import cacheService from '~/services/facades/cache';
+import cacheService from '~/services/cache';
 
 import { tapSubscribe } from './tapSubscrible';
 

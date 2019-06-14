@@ -1,6 +1,6 @@
 import * as Rx from 'rxjs';
 import * as RxOp from 'rxjs/operators';
-import cacheService from '~/services/facades/cache';
+import cacheService from '~/services/cache';
 
 interface IOptions {
   refresh: boolean;

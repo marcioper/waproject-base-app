@@ -1,5 +1,5 @@
 import { NavigationActions, NavigationDispatch, StackActions } from 'react-navigation';
-import { InteractionManager } from '~/providers/interactionManager';
+import { InteractionManager } from '~/facades/interactionManager';
 
 export default {
   validate(url: string): boolean {

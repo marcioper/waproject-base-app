@@ -1,14 +1,16 @@
+import { Notification } from 'react-native-firebase/notifications';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationScreenProp } from 'react-navigation';
-import * as Rx from 'rxjs'; import { Observable, ReplaySubject, Subject } from 'rxjs';
-
-import { appReady } from '../';
+import * as Rx from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import storageService, { StorageService } from '~/facades/storage';
 import { INotificationHandler } from '~/interfaces/notification';
 import RxOp from '~/rxjs-operators';
-import firebaseService, { FirebaseService, INotificationInfoRemote } from '../facades/firebase';
-import storageService, { StorageService } from '../facades/storage';
+
+import { appReady } from '../';
 import tokenService, { TokenService } from '../token';
-import { Notification } from 'react-native-firebase/notifications';
+import firebaseService, { FirebaseService, INotificationInfoRemote } from './firebase';
+import { register } from './handlers/register';
 
 export class NotificationService {
   private navigator: NavigationScreenProp<any>;
@@ -53,6 +55,7 @@ export class NotificationService {
 
   public setup(navigator: NavigationScreenProp<any>): void {
     this.navigator = navigator;
+    register(this);
   }
 
   public getToken(): Observable<string> {

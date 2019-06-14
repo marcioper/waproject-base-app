@@ -5,7 +5,7 @@ import { NavigationScreenConfig, NavigationScreenOptions } from 'react-navigatio
 import BaseComponent from '~/components/Shared/Abstract/Base';
 import ErrorMessage from '~/components/Shared/ErrorMessage';
 import { IUser } from '~/interfaces/models/user';
-import { confirm } from '~/providers/confirm';
+import Alert from '~/facades/alert';
 import RxOp from '~/rxjs-operators';
 import userService from '~/services/user';
 import { classes, theme } from '~/theme';
@@ -55,7 +55,7 @@ export default class ProfilePage extends BaseComponent<{}, IState> {
   }
 
   logout = (): void => {
-    confirm('Confirmar', 'Deseja realmente sair?', 'Sim', 'Não').pipe(
+    Alert.confirm('Confirmar', 'Deseja realmente sair?', 'Sim', 'Não').pipe(
       RxOp.filter(ok => ok),
       RxOp.switchMap(() => userService.logout().pipe(RxOp.loader())),
       RxOp.logError(),

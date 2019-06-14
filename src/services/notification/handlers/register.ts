@@ -1,4 +1,6 @@
-// import notificationService from '..';
-// import { handle as openProfileHandler } from './openProfile';
+import { NotificationService } from '..';
+import { handle as openProfileHandler } from './openProfile';
 
-// notificationService.registerHandler('open-profile', openProfileHandler);
+export function register(notificationService: NotificationService) {
+  notificationService.registerHandler('open-profile', openProfileHandler);
+}

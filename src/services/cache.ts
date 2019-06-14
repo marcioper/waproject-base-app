@@ -2,9 +2,8 @@ import dateFnsAddMinutes from 'date-fns/addMinutes';
 import dateFnsIsBefore from 'date-fns/isBefore';
 import * as Rx from 'rxjs';
 import * as RxOp from 'rxjs/operators';
+import storageService from '~/facades/storage';
 import { ICache } from '~/interfaces/cache';
-
-import storageService from './storage';
 
 export class CacheService {
   private change$ = new Rx.Subject<{ key: string, value: ICache }>();

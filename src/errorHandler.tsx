@@ -1,8 +1,8 @@
 import { setJSExceptionHandler } from 'react-native-exception-handler';
 import RNRestart from 'react-native-restart';
 import { IS_DEV } from '~/config';
-import { alertError } from '~/providers/alert';
-import { toastError } from '~/providers/toast';
+import Alert from '~/facades/alert';
+import Toast from '~/facades/toast';
 import logService from '~/services/log';
 
 setJSExceptionHandler((err: any, isFatal: boolean) => {
@@ -11,10 +11,10 @@ setJSExceptionHandler((err: any, isFatal: boolean) => {
   logService.handleError(err);
 
   if (!isFatal) {
-    toastError(err);
+    Toast.error(err);
     return;
   }
 
-  alertError(err, 'Reabrir', 'É necessário reabrir o app')
+  Alert.error(err, 'Reabrir', 'É necessário reabrir o app')
     .subscribe(() => RNRestart.Restart());
 }, !IS_DEV);

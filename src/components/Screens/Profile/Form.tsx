@@ -5,8 +5,8 @@ import * as React from 'react';
 import { NavigationScreenConfig, NavigationScreenOptions } from 'react-navigation';
 import FormComponent, { IStateForm } from '~/components/Shared/Abstract/Form';
 import { IUser } from '~/interfaces/models/user';
-import { toastError } from '~/providers/toast';
-import rxjsOperators from '~/rxjs-operators';
+import Toast from '~/facades/toast';
+import RxOp from '~/rxjs-operators';
 import userService from '~/services/user';
 import { classes } from '~/theme';
 
@@ -39,14 +39,14 @@ export default class UserEditPage extends FormComponent<{}, IState> {
 
   onSave = (): void => {
     this.isFormValid().pipe(
-      rxjsOperators.tap(valid => !valid && toastError('Revise os campos')),
-      rxjsOperators.filter(valid => valid),
-      rxjsOperators.switchMap(() => userService.save(this.state.model as IUser).pipe(rxjsOperators.loader())),
-      rxjsOperators.logError(),
-      rxjsOperators.bindComponent(this)
+      RxOp.tap(valid => !valid && Toast.error('Revise os campos')),
+      RxOp.filter(valid => valid),
+      RxOp.switchMap(() => userService.save(this.state.model as IUser).pipe(RxOp.loader())),
+      RxOp.logError(),
+      RxOp.bindComponent(this)
     ).subscribe(() => {
       this.navigateBack();
-    }, err => toastError(err));
+    }, err => Toast.error(err));
   }
 
   render(): JSX.Element {

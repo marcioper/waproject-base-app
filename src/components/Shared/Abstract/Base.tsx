@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { NavigationActions, NavigationNavigateActionPayload, NavigationScreenProp, StackActions } from 'react-navigation';
-import { InteractionManager } from '~/providers/interactionManager';
+import { InteractionManager } from '~/facades/interactionManager';
 
 export default abstract class BaseComponent<P = {}, S = {}> extends PureComponent<P, S> {
   public params: any;

@@ -3,7 +3,7 @@ import React from 'react';
 import BaseComponent from '~/components/Shared/Abstract/Base';
 import WithNavigation from '~/decorators/withNavigation';
 import { IUser } from '~/interfaces/models/user';
-import { toastError } from '~/providers/toast';
+import Toast from '~/facades/toast';
 import RxOp from '~/rxjs-operators';
 import userService from '~/services/user';
 
@@ -25,7 +25,7 @@ export default class ButtonHeaderProfile extends BaseComponent<{}, IState> {
       RxOp.bindComponent(this)
     ).subscribe(({ data: user }) => {
       this.setState({ user, verified: true });
-    }, err => toastError(err));
+    }, err => Toast.error(err));
   }
 
   navigateLogin = () => this.navigate('Login');

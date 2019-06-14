@@ -4,8 +4,8 @@ import { Button, Card, Text } from 'native-base';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import FormComponent, { IStateForm } from '~/components/Shared/Abstract/Form';
-import { toastError } from '~/providers/toast';
-import rxjsOperators from '~/rxjs-operators';
+import Toast from '~/facades/toast';
+import RxOp from '~/rxjs-operators';
 import { theme } from '~/theme';
 
 interface IState extends IStateForm<{ email: string, password: string }> {
@@ -23,12 +23,12 @@ export default class LoginFormComponent extends FormComponent<IProps, IState> {
 
   handleSubmit = () => {
     this.isFormValid().pipe(
-      rxjsOperators.filter(valid => valid),
-      rxjsOperators.logError(),
-      rxjsOperators.bindComponent(this)
+      RxOp.filter(valid => valid),
+      RxOp.logError(),
+      RxOp.bindComponent(this)
     ).subscribe(() => {
       this.props.onSubmit(this.state.model as any);
-    }, err => toastError(err));
+    }, err => Toast.error(err));
   }
 
   render() {

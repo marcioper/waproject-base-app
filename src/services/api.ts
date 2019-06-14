@@ -1,13 +1,14 @@
 import axios, { AxiosResponse, Method } from 'axios';
 import { NetInfo } from 'react-native';
-import * as rxjs from 'rxjs'; import { Observable, ReplaySubject } from 'rxjs';
+import * as rxjs from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 import { ApiError } from '~/errors/api';
 import { NoInternetError } from '~/errors/noInternet';
-import rxjsOperators from '~/rxjs-operators';
+import RxOp from '~/rxjs-operators';
 import { API_ENDPOINT } from '~/config';
-import logService, { LogService } from '../log';
-import tokenService, { TokenService } from '../token';
+import logService, { LogService } from './log';
+import tokenService, { TokenService } from './token';
 
 export class ApiService {
   private connection$: ReplaySubject<boolean>;
@@ -35,27 +36,27 @@ export class ApiService {
 
   public connection(): Observable<boolean> {
     return this.connection$.pipe(
-      rxjsOperators.distinctUntilChanged()
+      RxOp.distinctUntilChanged()
     );
   }
 
   private request<T>(method: Method, url: string, data: any = null): Observable<T> {
     return this.connection$.pipe(
-      rxjsOperators.sampleTime(500),
-      rxjsOperators.first(),
-      rxjsOperators.switchMap(connected => {
+      RxOp.sampleTime(500),
+      RxOp.first(),
+      RxOp.switchMap(connected => {
         return !connected ?
           rxjs.throwError(new NoInternetError()) :
           this.tokenService.getToken().pipe();
       }),
-      rxjsOperators.first(),
-      rxjsOperators.map(tokens => {
+      RxOp.first(),
+      RxOp.map(tokens => {
         return !tokens ? {} : {
           Authorization: `bearer ${tokens.accessToken}`,
           RefreshToken: tokens.refreshToken
         };
       }),
-      rxjsOperators.switchMap(headers => {
+      RxOp.switchMap(headers => {
         return axios.request({
           baseURL: this.apiEndpoint,
           url,
@@ -69,9 +70,9 @@ export class ApiService {
           data: method === 'POST' ? data : null
         });
       }),
-      rxjsOperators.switchMap(res => this.checkNewToken(res)),
-      rxjsOperators.map(response => response.data),
-      rxjsOperators.catchError(err => {
+      RxOp.switchMap(res => this.checkNewToken(res)),
+      RxOp.map(response => response.data),
+      RxOp.catchError(err => {
         return !err.config ?
           rxjs.throwError(err) :
           rxjs.throwError(new ApiError(err.config, err.response, err));
@@ -90,7 +91,7 @@ export class ApiService {
 
     return this.tokenService
       .setAccessToken(accessToken)
-      .pipe(rxjsOperators.map(() => response));
+      .pipe(RxOp.map(() => response));
   }
 
   private watchNetwork(): void {

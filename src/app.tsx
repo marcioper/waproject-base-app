@@ -1,4 +1,5 @@
 import './errorHandler';
+import './prototype';
 
 import { setConfig } from '@react-form-fields/native-base/config';
 import ConfigBuilder from '@react-form-fields/native-base/config/builder';

@@ -3,7 +3,7 @@ import { StatusBar, View } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import BaseComponent from '~/components/Shared/Abstract/Base';
 import { IS_ANDROID } from '~/config';
-import rxjsOperators from '~/rxjs-operators';
+import RxOp from '~/rxjs-operators';
 import { appDefaultNavigation, appOpened } from '~/services';
 import tokenService from '~/services/token';
 import { theme } from '~/theme';
@@ -17,15 +17,15 @@ export default class IndexPage extends BaseComponent {
     IS_ANDROID && StatusBar.setBackgroundColor(theme.statusBarColor);
 
     appDefaultNavigation().pipe(
-      rxjsOperators.first(),
-      rxjsOperators.filter(ok => ok),
-      rxjsOperators.switchMap(() => tokenService.isAuthenticated()),
-      rxjsOperators.map(isAuthenticated => {
+      RxOp.first(),
+      RxOp.filter(ok => ok),
+      RxOp.switchMap(() => tokenService.isAuthenticated()),
+      RxOp.map(isAuthenticated => {
         setTimeout(() => SplashScreen.hide(), 500);
         this.navigate(isAuthenticated ? 'Home' : 'Home', null, true);
       }),
-      rxjsOperators.logError(),
-      rxjsOperators.bindComponent(this)
+      RxOp.logError(),
+      RxOp.bindComponent(this)
     ).subscribe();
   }
 

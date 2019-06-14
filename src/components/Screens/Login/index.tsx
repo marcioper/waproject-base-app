@@ -7,10 +7,10 @@ import LoginSocialComponent from '~/components/Screens/Login/components/Social';
 import BaseComponent from '~/components/Shared/Abstract/Base';
 import imageBackground from '~/images/background.jpg';
 import imageLogo from '~/images/logo.png';
-import { toastError } from '~/providers/toast';
-import rxjsOperators from '~/rxjs-operators';
-import facebookService from '~/services/facades/facebook';
-import googleService from '~/services/facades/google';
+import Toast from '~/facades/toast';
+import RxOp from '~/rxjs-operators';
+import facebookService from '~/services/facebook';
+import googleService from '~/services/google';
 import userService from '~/services/user';
 import { theme } from '~/theme';
 
@@ -52,10 +52,10 @@ export default class LoginPage extends BaseComponent<{}, IState> {
 
   handleForm = (model: { email: string, password: string }) => {
     userService.login(model.email, model.password).pipe(
-      rxjsOperators.loader(),
-      rxjsOperators.logError(),
-      rxjsOperators.bindComponent(this)
-    ).subscribe(() => this.navigateToHome(), err => toastError(err));
+      RxOp.loader(),
+      RxOp.logError(),
+      RxOp.bindComponent(this)
+    ).subscribe(() => this.navigateToHome(), err => Toast.error(err));
   }
 
   handleLoginSocial = (provider: 'google' | 'facebook'): void => {
@@ -65,13 +65,13 @@ export default class LoginPage extends BaseComponent<{}, IState> {
     };
 
     providers[provider].login().pipe(
-      rxjsOperators.tap(a => console.log(a)),
-      rxjsOperators.filter(accessToken => !!accessToken),
-      rxjsOperators.switchMap(accessToken => userService.loginSocial(provider, accessToken)),
-      rxjsOperators.loader(),
-      rxjsOperators.logError(),
-      rxjsOperators.bindComponent(this)
-    ).subscribe(() => this.navigateToHome(), err => toastError(err));
+      RxOp.tap(a => console.log(a)),
+      RxOp.filter(accessToken => !!accessToken),
+      RxOp.switchMap(accessToken => userService.loginSocial(provider, accessToken)),
+      RxOp.loader(),
+      RxOp.logError(),
+      RxOp.bindComponent(this)
+    ).subscribe(() => this.navigateToHome(), err => Toast.error(err));
   }
 
   navigateToHome = (): void => {

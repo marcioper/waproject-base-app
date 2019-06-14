@@ -24,7 +24,7 @@ export class FirebaseService {
     ).subscribe();
   }
 
-  public async testLocal(): Promise<void> {
+  public async testLocalNotification(): Promise<void> {
     const notification = new firebase.notifications.Notification()
       .setTitle('Test Local')
       .setBody('Hey this is the body')

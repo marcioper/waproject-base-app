@@ -3,8 +3,9 @@ import SplashScreen from 'react-native-splash-screen';
 import { NavigationDispatch, NavigationScreenProp } from 'react-navigation';
 import * as rxjs from 'rxjs'; import { Observable, ReplaySubject } from 'rxjs';
 
-import { appReady } from '../..';
-import rxjsOperators from '~/rxjs-operators';
+import { appReady } from '..';
+import RxOp from '~/rxjs-operators';
+import { register } from './handlers/register';
 
 export interface ILinkingHandler {
   validate: (url: string) => boolean;
@@ -20,9 +21,9 @@ export class LinkingService {
     this.hasInitialUrl$ = new ReplaySubject(1);
 
     rxjs.of(true).pipe(
-      rxjsOperators.switchMap(() => Linking.getInitialURL()),
-      rxjsOperators.logError(),
-      rxjsOperators.tap(url => this.execUrl(url, true))
+      RxOp.switchMap(() => Linking.getInitialURL()),
+      RxOp.logError(),
+      RxOp.tap(url => this.execUrl(url, true))
     ).subscribe();
 
     Linking.addEventListener('url', ({ url }) => {
@@ -32,6 +33,7 @@ export class LinkingService {
 
   public setup(navigator: NavigationScreenProp<any>): void {
     this.navigator = navigator;
+    register(this);
   }
 
   public registerHandler(handler: ILinkingHandler): void {
@@ -49,10 +51,10 @@ export class LinkingService {
     if (!handler) return;
 
     appReady().pipe(
-      rxjsOperators.switchMap(() => handler.handle(url, this.navigator.dispatch, initial)),
-      rxjsOperators.tap(() => SplashScreen.hide()),
-      rxjsOperators.tap(() => this.hasInitialUrl$.next(false)),
-      rxjsOperators.logError()
+      RxOp.switchMap(() => handler.handle(url, this.navigator.dispatch, initial)),
+      RxOp.tap(() => SplashScreen.hide()),
+      RxOp.tap(() => this.hasInitialUrl$.next(false)),
+      RxOp.logError()
     ).subscribe();
   }
 

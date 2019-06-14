@@ -1,9 +1,10 @@
 import { GoogleSignin } from 'react-native-google-signin';
-import * as rxjs from 'rxjs'; import { Observable } from 'rxjs';
+import * as rxjs from 'rxjs';
+import { Observable } from 'rxjs';
 
-import rxjsOperators from '~/rxjs-operators';
+import RxOp from '~/rxjs-operators';
 import { GOOGLE_API } from '~/config';
-import logService, { LogService } from '../log';
+import logService, { LogService } from './log';
 
 export class GoogleService {
   constructor(
@@ -20,14 +21,14 @@ export class GoogleService {
 
   public login(): Observable<string> {
     return rxjs.of(true).pipe(
-      rxjsOperators.tap(() => this.logService.breadcrumb('Google Login')),
-      rxjsOperators.switchMap(() => GoogleSignin.signIn()),
-      rxjsOperators.switchMap(() => GoogleSignin.getTokens()),
-      rxjsOperators.catchError(err => {
+      RxOp.tap(() => this.logService.breadcrumb('Google Login')),
+      RxOp.switchMap(() => GoogleSignin.signIn()),
+      RxOp.switchMap(() => GoogleSignin.getTokens()),
+      RxOp.catchError(err => {
         return [-5, 12501].includes(err.code) ? rxjs.of({ accessToken: null }) : rxjs.throwError(err);
       }),
-      rxjsOperators.map(({ accessToken }) => accessToken),
-      rxjsOperators.tap(a => this.logService.breadcrumb(`Google Login ${a ? 'Completed' : 'Cancelled'}`))
+      RxOp.map(({ accessToken }) => accessToken),
+      RxOp.tap(a => this.logService.breadcrumb(`Google Login ${a ? 'Completed' : 'Cancelled'}`))
     );
   }
 
