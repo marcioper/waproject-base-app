@@ -1,4 +1,4 @@
-package br.com.waproject.app;
+package br.com.waproject.base;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

@@ -1,7 +1,7 @@
 Informações do Aplicativo
 =========================
 
-**AppId:** br.com.waproject.app  
+**AppId:** br.com.waproject.base  
 
 Android KeyStore:
 -----------------

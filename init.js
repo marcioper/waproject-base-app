@@ -34,7 +34,7 @@ async function askParams(answers = {}) {
     name: 'appId',
     default: answers.appId,
     validate: i => i.length >= 3 ? true : 'Pelo menos 3 letras',
-    message: 'App Id (ex. br.com.waproject.app)'
+    message: 'App Id (ex. br.com.waproject.base)'
   }, {
     name: 'appName',
     default: answers.appName,

@@ -44,10 +44,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>br.com.waproject.app</string>
+			<string>br.com.waproject.base</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>br.com.waproject.app</string>
+				<string>br.com.waproject.base</string>
 			</array>
 		</dict>
 	</array>

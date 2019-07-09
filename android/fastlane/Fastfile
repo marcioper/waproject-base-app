@@ -1,0 +1,6 @@
+lane :release do
+  sh ("(cd .. && yarn --force)")
+  
+  gradle(task: "clean assembleRelease")
+  upload_to_play_store
+end
