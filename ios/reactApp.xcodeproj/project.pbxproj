@@ -888,6 +888,7 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = U28D385H6N;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1508,6 +1509,7 @@
 			baseConfigurationReference = 9BDFABCA8EE2463E695E5244 /* Pods-reactAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U28D385H6N;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1554,6 +1556,7 @@
 			baseConfigurationReference = 582080E3705D4230C77995AE /* Pods-reactAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = U28D385H6N;
 				HEADER_SEARCH_PATHS = (
@@ -1782,6 +1785,7 @@
 			baseConfigurationReference = 977B9F9FD66C107C5FEC7F0A /* Pods-reactAppTests.staging.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = U28D385H6N;
 				HEADER_SEARCH_PATHS = (

@@ -1,7 +1,16 @@
 lane :release do
-  # get_certificates           # invokes cert
-  # get_provisioning_profile   # invokes sigh
-  build_app(scheme: "reactAppRelease",
-            workspace: "reactApp.xcworkspace",
-            include_bitcode: true)
+  cocoapods
+  
+  get_certificates           
+  get_provisioning_profile   
+  get_push_certificate
+
+  increment_build_number(
+    build_number: 1,
+    xcodeproj: "reactApp.xcodeproj"
+  )
+
+  enable_automatic_code_signing
+  build_app(scheme: "reactAppRelease", workspace: "reactApp.xcworkspace", include_bitcode: true)
+  upload_to_app_store
 end
