@@ -1,3 +1,4 @@
+/* eslint-disable */
 const fs = require('fs');
 const inquirer = require('inquirer');
 const lodash = require('lodash');
@@ -17,6 +18,8 @@ async function init() {
     `${__dirname}/ios/reactApp.xcodeproj/project.pbxproj`,
     `${__dirname}/ios/reactApp/Info.plist`,
     `${__dirname}/scripts/generate-key.js`,
+    `${__dirname}/android/fastlane/Appfile`,
+    `${__dirname}/ios/fastlane/Appfile`,
   ];
 
   for (let f of files) {
@@ -47,11 +50,11 @@ async function askParams(answers = {}) {
   }]);
 
   if (!params.confirmed) {
-    console.log('---- Responda novamente:')
+    console.log('---- Responda novamente:');
     return askParams(params);
   }
 
-  params.slug = lodash.camelCase(params.appName).toLowerCase()
+  params.slug = lodash.camelCase(params.appName).toLowerCase();
 
   return params;
 }
@@ -60,7 +63,7 @@ async function replaceContent(path, { appId, appName, slug }) {
   let content = fs.readFileSync(path, 'utf8');
 
   content = content
-    .replace(/br\.com\.waproject\.app/gim, appId)
+    .replace(/br\.com\.waproject\.base/gim, appId)
     .replace(/waproject/gm, slug)
     .replace(/Wa\sProject/gim, appName);
 
@@ -88,4 +91,4 @@ init().then(() => {
 }).catch(err => {
   console.log(err);
   process.exit(-1);
-})
+});
