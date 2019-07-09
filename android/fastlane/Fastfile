@@ -1,5 +1,5 @@
 lane :release do
-  sh("(cd ../../ && ./scripts/change-version.sh)")
+  sh("(cd ../../ && sh ./scripts/change-version.sh)")
   
   gradle(task: "clean assembleRelease")
   upload_to_play_store

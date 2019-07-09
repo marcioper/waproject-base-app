@@ -1,5 +1,5 @@
 lane :release do
-  sh("(cd ../../ && ./scripts/change-version.sh)")
+  sh("(cd ../../ && sh ./scripts/change-version.sh)")
   cocoapods
   
   get_certificates           
