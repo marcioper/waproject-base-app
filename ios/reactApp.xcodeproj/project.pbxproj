@@ -1423,7 +1423,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-reactApp/Pods-reactApp-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-reactApp/Pods-reactApp-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
@@ -1434,7 +1434,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-reactApp/Pods-reactApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-reactApp/Pods-reactApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		941E203188D09E66B24FE325 /* [CP] Check Pods Manifest.lock */ = {

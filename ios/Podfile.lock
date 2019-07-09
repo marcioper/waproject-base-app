@@ -88,7 +88,6 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
-  - yoga (0.59.9.React)
 
 DEPENDENCIES:
   - Crashlytics (~> 3.10.7)
@@ -98,7 +97,6 @@ DEPENDENCIES:
   - Firebase/Core (~> 5.15.0)
   - Firebase/Messaging (~> 5.15.0)
   - GoogleSignIn (~> 4.4.0)
-  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -122,10 +120,6 @@ SPEC REPOS:
     - nanopb
     - Protobuf
 
-EXTERNAL SOURCES:
-  yoga:
-    :path: "../node_modules/react-native/ReactCommon/yoga"
-
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
@@ -146,8 +140,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
-  yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
 
-PODFILE CHECKSUM: a377c7823a77820c8823996da7ff9240406dbd67
+PODFILE CHECKSUM: 80563171b2e7b7be588d596b6c784cd3f50953a9
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.2
