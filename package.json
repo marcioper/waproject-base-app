@@ -9,7 +9,9 @@
     "dev-android": "yarn run react-native run-android",
     "dev-ios": "yarn run react-native run-ios",
     "release-android": "sh scripts/release.android.sh",
-    "release-ios": "sh scripts/release.ios.sh"
+    "release-android-fastlane": "(cd ./android && fastlane release)",
+    "release-ios": "sh scripts/release.ios.sh",
+    "release-ios-fastlane": "(cd ./ios && fastlane release)"
   },
   "husky": {
     "hooks": {

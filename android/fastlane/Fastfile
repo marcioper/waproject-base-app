@@ -4,5 +4,5 @@ lane :release do
   gradle(task: "clean assembleRelease")
   upload_to_play_store
 
-  sh("(cd ../ && sh ./scritps/upload-sourcemap.android.sh)")
+  sh("(cd ../../ && sh ./scritps/upload-sourcemap.android.sh)")
 end

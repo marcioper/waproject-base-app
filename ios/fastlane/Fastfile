@@ -10,5 +10,5 @@ lane :release do
   build_app(scheme: "reactAppRelease", workspace: "reactApp.xcworkspace", include_bitcode: true)
   upload_to_app_store
 
-  sh("(cd ../ && sh ./scritps/upload-sourcemap.ios.sh)")
+  sh("(cd ../../ && sh ./scritps/upload-sourcemap.ios.sh)")
 end
