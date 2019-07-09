@@ -1,4 +1,5 @@
 lane :release do
+  sh ("(cd .. && yarn --force)")
   cocoapods
   
   get_certificates           
