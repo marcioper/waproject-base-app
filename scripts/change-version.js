@@ -40,8 +40,9 @@ async function replaceContent(path) {
 
   content = content
     .replace(/(versionCode(?:[\s\=\"]+)?)\d+/gim, `$1${versionBuild}`)
-    .replace(/(version(?:[\s\=\"]+)?)\d+/gim, `$1${versionBuild}`)
     .replace(/(versionName(?:[\s\=\"]+)?)[\d\.]+/gim, `$1${version}`)
+    .replace(/(\"version\":\s?\")[\d\.]+(\")/gim, `$1${version}$2`)
+    .replace(/(\"versionBuild\":\s?)[\d\.]+/gim, `$1${versionBuild}`)
     .replace(/(\<key\>CFBundleShortVersionString\<\/key\>(?:[\n\t.]+)?\<string\>)(?:.+)?(\<\/string\>)/gim, `$1${version}$2`)
     .replace(/(\<key\>CFBundleVersion\<\/key\>(?:[\n\t.]+)?\<string\>)(?:.+)?(\<\/string\>)/gim, `$1${versionBuild}$2`);
 
