@@ -1,9 +1,11 @@
-const { version, versionBuild } = require(`${__dirname}/../package.json`);
+/* eslint-disable */
+
+let { version, versionBuild } = require(`${__dirname}/../package.json`);
 const inquirer = require('inquirer');
 const fs = require('fs');
 
 async function init(ask = true) {
-  console.log('%s\x1b[32m%s\x1b[0m', '\nVersion in package.json: ', `v${version}(${versionBuild})`);
+  console.log('%s\x1b[32m%s\x1b[0m', '\nNew Version: ', `v${version}(${versionBuild})`);
 
   if (ask) {
     const { confirmed } = await inquirer.prompt([{
@@ -19,6 +21,7 @@ async function init(ask = true) {
   }
 
   const files = [
+    `${__dirname}/../package.json`,
     `${__dirname}/../android/app/build.gradle`,
     `${__dirname}/../android/app/src/main/AndroidManifest.xml`,
     `${__dirname}/../ios/reactApp/Info.plist`
@@ -37,6 +40,7 @@ async function replaceContent(path) {
 
   content = content
     .replace(/(versionCode(?:[\s\=\"]+)?)\d+/gim, `$1${versionBuild}`)
+    .replace(/(version(?:[\s\=\"]+)?)\d+/gim, `$1${versionBuild}`)
     .replace(/(versionName(?:[\s\=\"]+)?)[\d\.]+/gim, `$1${version}`)
     .replace(/(\<key\>CFBundleShortVersionString\<\/key\>(?:[\n\t.]+)?\<string\>)(?:.+)?(\<\/string\>)/gim, `$1${version}$2`)
     .replace(/(\<key\>CFBundleVersion\<\/key\>(?:[\n\t.]+)?\<string\>)(?:.+)?(\<\/string\>)/gim, `$1${versionBuild}$2`);
@@ -46,11 +50,17 @@ async function replaceContent(path) {
 
 module.exports = init;
 
-
 if (require.main === module) {
   const args = process.argv.slice(2);
+  const force = !args.some(a => `${a}`.trim() === '-f');
+  const buildVersion = args.find(a => !isNaN(Number(a)));
 
-  init(!args.some(a => `${a}`.trim() === '-f')).then(success => {
+  if (buildVersion) {
+    versionBuild = buildVersion;
+    version = version.toString().replace(/([0-9]+)$/gi, buildVersion)
+  }
+
+  init(force).then(success => {
     process.exit(success ? 0 : -1);
   }).catch(err => {
     console.log(err);
