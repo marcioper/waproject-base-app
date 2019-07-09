@@ -1,5 +1,7 @@
 lane :release do
   sh ("(cd .. && yarn --force)")
+
+  increment_build_number(build_number: number_of_commits)
   
   gradle(task: "clean assembleRelease")
   upload_to_play_store
