@@ -14,18 +14,14 @@ export default class HomePage extends BaseComponent {
       tabBarLabel: 'Início',
       headerLeft: () => (
         <Button style={classes.headerButton} onPress={navigation.toggleDrawer}>
-          <Icon name='menu' />
+          <Icon name="menu" />
         </Button>
       ),
       headerRight: <ButtonHeaderProfile />,
-      drawerIcon: ({ tintColor }) => (
-        <Icon name='home' style={{ color: tintColor }} />
-      ),
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name='home' style={{ color: tintColor }} />
-      )
+      drawerIcon: ({ tintColor }) => <Icon name="home" style={{ color: tintColor }} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="home" style={{ color: tintColor }} />
     };
-  }
+  };
 
   public render(): JSX.Element {
     return (
