@@ -25,7 +25,7 @@
     "base-64": "0.1.0",
     "bugsnag-react-native": "2.21.0",
     "date-fns": "2.0.0-alpha.27",
-    "lodash": "4.17.11",
+    "lodash": "4.17.19",
     "native-base": "2.12.1",
     "react": "16.8.6",
     "react-native": "0.59.9",
